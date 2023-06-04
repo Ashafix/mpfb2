@@ -46,11 +46,17 @@ class HumanService:
     @staticmethod
     def get_list_of_human_presets(as_list_enum=True, use_cache=True):
         """
-        Returns a list of human presets, i.e. all stored definitions which can be used a template
-        as_list_enum: bool, default True, if True, the values are returned as a list of tuples which can be used for Blender's enum
-        if False, the values are returned as a list of strings, i.e. only the names
-        use_cache: bool, default True, if True the list is not updated once it is populated, if False, the list is updated every time
-        the function is called
+        Returns a list of human presets, i.e. all stored definitions which can be used a template.
+        If the function is called for the first time or use_cache=False the global variable _EXISTING_PRESETS is updated
+        Args:
+            as_list_enum: bool, default True,
+                if True, the values are returned as a list of tuples which can be used for Blender's EnumProperty
+                if False, the values are returned as a list of strings, i.e. only the names
+            use_cache: bool, default True,
+                if True the list is not updated once it is populated,
+                if False, the list is updated every time the function is called
+
+        Returns: list of strings or tuples
         """
         global _EXISTING_PRESETS
         if _EXISTING_PRESETS is None or not use_cache:
